@@ -1,5 +1,6 @@
 package com.yeachan.exp.service;
 
+import com.yeachan.exp.dto.PostUpdateRequestDto;
 import com.yeachan.exp.dto.PostsMainResponseDto;
 import com.yeachan.exp.dto.PostsSaveRequestDto;
 import com.yeachan.exp.repository.PostsRepository;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,5 +27,13 @@ public class PostsService {
         return postsRepository.findAllDesc()
                 .map(PostsMainResponseDto::new)
                 .collect(Collectors.toList());
+    }
+    
+    public void deletePost(Long id){
+        postsRepository.deleteById(id);
+    }
+    @Transactional
+    public void fixPost(PostUpdateRequestDto dto) {
+        postsRepository.updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime.now(), dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getId());
     }
 }
