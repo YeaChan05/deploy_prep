@@ -1,7 +1,7 @@
 package com.yeachan.exp.api;
 
 import com.yeachan.exp.dto.PostsSaveRequestDto;
-import com.yeachan.exp.repository.PostsRepository;
+import com.yeachan.exp.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class WebRestController {
-    private final PostsRepository postsRepository;
+    private final PostsService postsService;
     @GetMapping("/test")
     public String hello() {
         return "Hi";
@@ -25,6 +25,6 @@ public class WebRestController {
     
     @PostMapping("/posts")
     public void savePosts(@RequestBody PostsSaveRequestDto dto){
-        postsRepository.save(dto.toEntity());
+        postsService.save(dto);
     }
 }

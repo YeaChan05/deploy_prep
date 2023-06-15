@@ -1,7 +1,7 @@
 package com.yeachan.exp.domain;
 
 import com.yeachan.exp.repository.PostsRepository;
-import org.aspectj.lang.annotation.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class PostsRepositoryTest {
     @Autowired
     PostsRepository postsRepository;
     
-    @After("")
-    public void cleanup() {
+    @AfterEach
+    void setUp() {
         postsRepository.deleteAll();
     }
     
@@ -40,18 +40,17 @@ public class PostsRepositoryTest {
         postsRepository.save(Posts.builder()
                 .title("테스트 게시글")
                 .content("테스트 본문")
-                .author("jojoldu@gmail.com")
+                .author("qkenrdl05@gmail.com")
                 .build());
         
         //when
         List<Posts> postsList = postsRepository.findAll();
-        
+
         //then
         Posts posts = postsList.get(0);
         assertThat(posts.getTitle(), is("테스트 게시글"));
         assertThat(posts.getContent(), is("테스트 본문"));
     }
-    
     @Test
     public void BaseTimeEntity_등록 () {
         //given
@@ -63,7 +62,6 @@ public class PostsRepositoryTest {
                 .build());
         //when
         List<Posts> postsList = postsRepository.findAll();
-        
         //then
         Posts posts = postsList.get(0);
         assertTrue(posts.getCreatedDate().isAfter(now));
