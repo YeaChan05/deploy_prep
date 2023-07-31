@@ -3,12 +3,12 @@ spring:
     console:
       enabled: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/exp
+    username: yeachan
+    password: tlsdPcks05
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: update
   main:
     allow-bean-definition-overriding: true
