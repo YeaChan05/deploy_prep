@@ -1,6 +1,7 @@
 package com.yeachan.exp.dto;
 
 import com.yeachan.exp.domain.Posts;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,20 +16,24 @@ import java.util.Optional;
  */
 
 @Getter
+@AllArgsConstructor
 public class PostsMainResponseDto {
     private Long id;
     private String title;
     private String author;
     private String modifiedDate;
-    
-    public PostsMainResponseDto(Posts entity) {
-        id = entity.getId();
-        title = entity.getTitle();
-        author = entity.getAuthor();
-        modifiedDate = toStringDateTime(entity.getModifiedDate());
+    private String content;
+    public static PostsMainResponseDto of(Posts entity){
+        return new PostsMainResponseDto(
+                entity.getId(),
+                entity.getTitle(),
+                entity.getAuthor(),
+                toStringDateTime(entity.getModifiedDate()),
+                entity.getContent()
+        );
     }
     
-    private String toStringDateTime(LocalDateTime localDateTime){
+    private static String toStringDateTime(LocalDateTime localDateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return Optional.ofNullable(localDateTime)
                 .map(formatter::format)
