@@ -4,14 +4,16 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
+import GitHubIcon from '@mui/icons-material/GitHub';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+        <Link color="inherit" href="https://github.com/YeaChan05" target="_blank">
+          My GitHub
+          <GitHubIcon/>
+        </Link>
+      {' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
