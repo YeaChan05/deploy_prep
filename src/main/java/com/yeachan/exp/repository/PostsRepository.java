@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 public interface PostsRepository extends JpaRepository<Posts, Long> {
     @Modifying
     @Query("update Posts p set p.modifiedDate = ?1, p.title = ?2, p.content = ?3, p.author = ?4 where p.id = ?5")
-    void updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime modifiedDate, String title, String content, String author, Long id);
+    Posts updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime modifiedDate, String title, String content, String author, Long id);
     
 
     @Query("SELECT p " +
             "FROM Posts p " +
-            "ORDER BY p.id DESC")
+            "ORDER BY p.modifiedDate DESC")
     Stream<Posts> findAllDesc();
 }

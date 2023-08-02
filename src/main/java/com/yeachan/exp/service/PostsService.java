@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +19,8 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto dto){
-        return postsRepository.save(dto.toEntity()).getId();
+    public Posts savePost(PostsSaveRequestDto dto){
+        return postsRepository.save(dto.toEntity());
     }
     
     @Transactional(readOnly = true)
@@ -31,16 +30,14 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
     
-    public void deletePost(Long id){
-        postsRepository.deleteById(id);
+    public Posts deletePost(Long id){
+        Posts posts =  postsRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        postsRepository.delete(posts);
+        return posts;
     }
     @Transactional
-    public void fixPost(PostUpdateRequestDto dto) {
-        postsRepository.updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime.now(), dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getId());
-    }
-    
-    public List<PostsMainResponseDto> getPosts() {
-        List<Posts> posts = postsRepository.findAll().stream().sorted(Comparator.comparing(Posts::getModifiedDate)).toList();
-        return posts.stream().map(PostsMainResponseDto::of).toList();
+    public Posts fixPost(PostUpdateRequestDto dto) {
+        Posts posts = postsRepository.updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime.now(), dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getId());
+        return posts;
     }
 }
