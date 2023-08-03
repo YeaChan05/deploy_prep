@@ -24,22 +24,27 @@ import java.util.List;
 public class WebRestController {
     private final PostsService postsService;
     
-    @PostMapping
+    @PostMapping("/publish")
     public ResponseEntity<?> savePosts(@RequestBody PostsSaveRequestDto dto){
         Posts posts = postsService.savePost(dto);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
     
     @PostMapping("/adjust")
-    public ResponseEntity<Posts> adjustPost(@RequestBody PostUpdateRequestDto dto){
-        Posts posts = postsService.fixPost(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(posts);
+    public ResponseEntity<?> adjustPost(@RequestBody PostUpdateRequestDto dto){
+        postsService.fixPost(dto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
     
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> deletePosts(@PathVariable Long postId) {
-        Posts posts = postsService.deletePost(postId);
-        return ResponseEntity.status(HttpStatus.OK).body(posts);
+        try{
+            Posts posts = postsService.deletePost(postId);
+            return ResponseEntity.status(HttpStatus.OK).body(posts);
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        
     }
     
     @GetMapping("/all")

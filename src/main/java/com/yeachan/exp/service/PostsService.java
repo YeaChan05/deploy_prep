@@ -36,8 +36,8 @@ public class PostsService {
         return posts;
     }
     @Transactional
-    public Posts fixPost(PostUpdateRequestDto dto) {
-        Posts posts = postsRepository.updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime.now(), dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getId());
-        return posts;
+    public void fixPost(PostUpdateRequestDto dto) {
+//        Posts posts = postsRepository.updateModifiedDateAndTitleAndContentAndAuthorById(LocalDateTime.now(), dto.getTitle(), dto.getContent(),  dto.getId());
+        postsRepository.updateModifiedDateAndTitleAndContentById(LocalDateTime.now(), dto.getTitle(), dto.getContent(), dto.getId());
     }
 }

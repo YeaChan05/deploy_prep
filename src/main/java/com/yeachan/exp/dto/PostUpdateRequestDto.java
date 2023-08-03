@@ -21,6 +21,5 @@ public class PostUpdateRequestDto {
     private Long id;
     private String title;
     private String content;
-    private String author;
     private LocalDateTime modifiedDate;
 }
