@@ -1,10 +1,9 @@
 package com.yeachan.exp.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 /**
  * package :  com.yeachan.exp.domain
@@ -16,6 +15,8 @@ import lombok.*;
 @Getter
 @Entity
 @ToString
+@Builder
+@AllArgsConstructor
 public class Posts extends BaseTimeEntity{
     
     @Id
@@ -25,15 +26,14 @@ public class Posts extends BaseTimeEntity{
     @Column(length = 500, nullable = false)
     private String title;
     
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = true)
     private String content;
     
     private String author;
     
-    @Builder
-    public Posts(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
+    @Lob
+    @Column(name = "mark_down", nullable = false)
+    @JdbcTypeCode(SqlTypes.BLOB)
+    private byte[] markDown;
+    
 }

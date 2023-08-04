@@ -41,6 +41,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'com.atlassian.commonmark:commonmark:0.17.0'
 }
 
 

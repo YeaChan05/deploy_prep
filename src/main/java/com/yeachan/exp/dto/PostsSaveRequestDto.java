@@ -1,10 +1,8 @@
 package com.yeachan.exp.dto;
 
 import com.yeachan.exp.domain.Posts;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.yeachan.exp.service.MarkdownUtils;
+import lombok.*;
 
 /**
  * package :  com.yeachan.exp.dto
@@ -14,25 +12,26 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-
+@ToString
 @NoArgsConstructor
 public class PostsSaveRequestDto {
     
     private String title;
-    private String content;
+    private byte[] content;
     private String author;
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author) {
+    public PostsSaveRequestDto(String title, byte[] content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
     }
     
-    public Posts toEntity(){
+    public Posts toEntity() {
         return Posts.builder()
-                .title(title)
-                .content(content)
+                .markDown(content)
+                .content(MarkdownUtils.convertToTextContent(content))
                 .author(author)
+                .title(title)
                 .build();
     }
 }

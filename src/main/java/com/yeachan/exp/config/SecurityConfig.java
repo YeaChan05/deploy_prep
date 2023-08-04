@@ -17,6 +17,14 @@ public class SecurityConfig implements WebMvcConfigurer {
         registry.addMapping("/posts/all")
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("GET");
+        
+        registry.addMapping("/posts/publish")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("POST");
+    
+        registry.addMapping("/posts/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET");
         WebMvcConfigurer.super.addCorsMappings(registry);
     }
 }

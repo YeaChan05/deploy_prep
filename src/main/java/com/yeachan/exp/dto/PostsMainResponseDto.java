@@ -1,6 +1,7 @@
 package com.yeachan.exp.dto;
 
 import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.service.MarkdownUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -29,7 +30,7 @@ public class PostsMainResponseDto {
                 entity.getTitle(),
                 entity.getAuthor(),
                 toStringDateTime(entity.getModifiedDate()),
-                entity.getContent()
+                MarkdownUtils.convertToTextContent(entity.getMarkDown())
         );
     }
     
