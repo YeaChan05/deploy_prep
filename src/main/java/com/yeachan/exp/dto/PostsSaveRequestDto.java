@@ -1,7 +1,7 @@
 package com.yeachan.exp.dto;
 
 import com.yeachan.exp.domain.Posts;
-import com.yeachan.exp.service.MarkdownUtils;
+import com.yeachan.exp.service.utils.MarkdownUtils;
 import lombok.*;
 
 /**

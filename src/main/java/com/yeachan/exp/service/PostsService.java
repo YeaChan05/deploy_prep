@@ -6,6 +6,7 @@ import com.yeachan.exp.dto.PostUpdateRequestDto;
 import com.yeachan.exp.dto.PostsMainResponseDto;
 import com.yeachan.exp.dto.PostsSaveRequestDto;
 import com.yeachan.exp.repository.PostsRepository;
+import com.yeachan.exp.service.utils.MarkdownUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
