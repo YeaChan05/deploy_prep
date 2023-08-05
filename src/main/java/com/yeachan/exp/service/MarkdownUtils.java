@@ -29,11 +29,32 @@ public class MarkdownUtils {
     }
     
     private static String removeDataUrlsAndLinks(String text) {
-        String pattern = "(data:(image|audio|video|application|font|text)/[^;]+;base64,[^\\s]+)|\\b(?:https?://)[^\\s]+";
-        text = text.replaceAll(pattern, "");
+        // 정규표현식 패턴
+        String dataPattern = "(data:(image|audio|video|application|font|text)/[^;]+;base64,[^\\s]+)";
+        String linksPattern = "\\b(?:https?://)[^\\s]+";
+        String headersPattern = "(#{1,6}\\s*)"; // 1~6 개의 # 뒤에 공백이 있는 경우 (H1 ~ H6)
+        String imagesPattern = "\\b(\\w+\\.(?i)(jpg|jpeg|png|gif|bmp|webp|svg|tiff))\\b";
+        
+        text = text.replaceAll(imagesPattern, "");
+        
+        text = text.replaceAll(dataPattern, "");
+        
+        text = text.replaceAll(linksPattern, "");
+        
+        text = text.replaceAll("\\[([^\\]]*)\\]\\([^\\)]*\\)", "");
+        
+        text = text.replaceAll("<img[^>]*>", "");
+
+        text = text.replaceAll(headersPattern, "");
+
+        text = text.replaceAll("[*_|`~<>]", "");
+        
         text = text.replaceAll("\"", "");
+        
         text = text.replace("(", "");
+        
         return text;
     }
+
 
 }

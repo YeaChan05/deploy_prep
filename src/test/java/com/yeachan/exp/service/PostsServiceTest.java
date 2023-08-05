@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.nio.charset.StandardCharsets;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -39,7 +41,7 @@ public class PostsServiceTest {
         //given
         PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .author("qkenrdl05@gmail.com")
-                .content("테스트 본문")
+                .content("테스트 본문".getBytes(StandardCharsets.UTF_8))
                 .title("테스트 타이틀")
                 .build();
         
