@@ -33,9 +33,11 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
     
+    @Transactional
     public Posts deletePost(Long id){
         Posts posts =  postsRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         postsRepository.delete(posts);
+        postsRepository.flush();
         return posts;
     }
     @Transactional
@@ -58,11 +60,4 @@ public class PostsService {
         );
     }
     
-    public String getEncodedMarkdown(Long postId) {
-        Posts post = postsRepository.findById(postId)
-                .orElseThrow(() -> new DataAccessResourceFailureException("Post not found"));
-        
-        byte[] markDown = post.getMarkDown();
-        return MarkdownUtils.convertToEncodedMarkdown(markDown);
-    }
 }
