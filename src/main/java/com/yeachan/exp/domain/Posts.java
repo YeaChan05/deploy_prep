@@ -1,5 +1,6 @@
 package com.yeachan.exp.domain;
 
+import com.yeachan.exp.dto.PostUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -26,9 +27,6 @@ public class Posts extends BaseTimeEntity{
     @Column(length = 500, nullable = false)
     private String title;
     
-    @Column(columnDefinition = "TEXT", nullable = true)
-    private String content;
-    
     private String author;
     
     @Lob
@@ -36,4 +34,9 @@ public class Posts extends BaseTimeEntity{
     @JdbcTypeCode(SqlTypes.BLOB)
     private byte[] markDown;
     
+    public void updatePost(PostUpdateRequestDto dto) {
+        super.updateModifiedDate();
+        this.title=dto.getTitle();
+        this.markDown= dto.getContent().getBytes();
+    }
 }

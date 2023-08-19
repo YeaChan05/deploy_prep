@@ -33,9 +33,9 @@ public class WebRestController {
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
     
-    @PostMapping("/adjust")
-    public ResponseEntity<?> adjustPost(@RequestBody PostUpdateRequestDto dto){
-        postsService.fixPost(dto);
+    @PostMapping("/{postId}")
+    public ResponseEntity<?> adjustPost(@PathVariable Long postId,@RequestBody PostUpdateRequestDto dto){
+        postsService.fixPost(postId,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     

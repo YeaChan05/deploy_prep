@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 /**
  * package :  com.yeachan.exp.dto
  * fileName : PostUpdateRequestDto
@@ -18,8 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class PostUpdateRequestDto {
-    private Long id;
     private String title;
     private String content;
-    private LocalDateTime modifiedDate;
 }

@@ -24,7 +24,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     
         registry.addMapping("/posts/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET","DELETE");
+                .allowedMethods("GET","DELETE","POST");
         
         WebMvcConfigurer.super.addCorsMappings(registry);
     }

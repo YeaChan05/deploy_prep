@@ -39,7 +39,6 @@ public class PostsRepositoryTest {
         //given
         postsRepository.save(Posts.builder()
                 .title("테스트 게시글")
-                .content("테스트 본문")
                 .author("qkenrdl05@gmail.com")
                 .build());
         
@@ -49,7 +48,7 @@ public class PostsRepositoryTest {
         //then
         Posts posts = postsList.get(0);
         assertThat(posts.getTitle(), is("테스트 게시글"));
-        assertThat(posts.getContent(), is("테스트 본문"));
+        
     }
     @Test
     public void BaseTimeEntity_등록 () {
@@ -57,7 +56,6 @@ public class PostsRepositoryTest {
         LocalDateTime now = LocalDateTime.now();
         postsRepository.save(Posts.builder()
                 .title("테스트 게시글")
-                .content("테스트 본문")
                 .author("qkenrdl05@gmail.com")
                 .build());
         //when
