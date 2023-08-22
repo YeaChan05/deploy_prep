@@ -16,10 +16,10 @@ import lombok.*;
 public class PostsSaveRequestDto {
     
     private String title;
-    private byte[] markDown;
+    private String markDown;
     private String author;
     @Builder
-    public PostsSaveRequestDto(String title, byte[] markDown, String author) {
+    public PostsSaveRequestDto(String title, String markDown, String author) {
         this.title = title;
         this.markDown = markDown;
         this.author = author;
@@ -27,7 +27,7 @@ public class PostsSaveRequestDto {
     
     public Posts toEntity() {
         return Posts.builder()
-                .markDown(markDown)
+                .markDown(markDown.getBytes())
                 .author(author)
                 .title(title)
                 .build();
