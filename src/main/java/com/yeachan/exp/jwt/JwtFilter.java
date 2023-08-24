@@ -6,14 +6,12 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * package :  com.yeachan.exp.domain.jwt
@@ -22,7 +20,6 @@ import java.util.Enumeration;
  * date : 2023-08-24
  */
 @RequiredArgsConstructor
-@Slf4j
 public class JwtFilter extends GenericFilterBean {
     public static String AUTHORIZATION_HEADER="Authorization";
     private final TokenProvider tokenProvider;
@@ -55,10 +52,7 @@ public class JwtFilter extends GenericFilterBean {
      */
     private String resolveToken(HttpServletRequest request){
         String bearerToken=request.getHeader(AUTHORIZATION_HEADER);
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()){
-            log.info(headerNames.nextElement());
-        }
+        
         if(StringUtils.hasText(bearerToken)&&bearerToken.startsWith("Bearer ")){
             return bearerToken.substring(7);
         }

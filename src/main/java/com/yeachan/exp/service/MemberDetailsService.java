@@ -3,7 +3,6 @@ package com.yeachan.exp.service;
 import com.yeachan.exp.domain.Member;
 import com.yeachan.exp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +21,6 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
     
@@ -48,7 +46,7 @@ public class MemberDetailsService implements UserDetailsService {
         if(!member.isActivated()){
             throw new RuntimeException(email+" -> 활성화되어 있지 않습니다.");
         }
-        log.info("{}",member);
+
         List<SimpleGrantedAuthority> grantedAuthorities = member.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .toList();

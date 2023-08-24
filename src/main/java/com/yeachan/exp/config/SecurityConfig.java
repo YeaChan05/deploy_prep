@@ -5,7 +5,6 @@ import com.yeachan.exp.jwt.JwtAuthenticationEntryPoint;
 import com.yeachan.exp.jwt.JwtSecurityConfig;
 import com.yeachan.exp.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -26,7 +25,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Slf4j
 @RequiredArgsConstructor
 public class SecurityConfig{
     private final TokenProvider tokenProvider;

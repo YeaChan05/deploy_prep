@@ -8,7 +8,6 @@ import com.yeachan.exp.dto.PostsSaveRequestDto;
 import com.yeachan.exp.repository.PostsRepository;
 import com.yeachan.exp.service.utils.MarkdownUtils;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Slf4j
 public class PostsService {
     private final PostsRepository postsRepository;
 
