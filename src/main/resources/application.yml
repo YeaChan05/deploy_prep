@@ -7,15 +7,20 @@ spring:
     url: jdbc:postgresql://localhost:5432/exp
     username: yeachan
     password: tlsdPcks05
+
   jpa:
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
         show_sql: true
   main:
     allow-bean-definition-overriding: true
+  sql:
+    init:
+      mode: always
 
 jwt:
   header: Authorization

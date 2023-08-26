@@ -1,6 +1,6 @@
 package com.yeachan.exp.service;
 
-import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.dto.PostsSaveRequestDto;
 import com.yeachan.exp.repository.PostsRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -14,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * package :  com.yeachan.exp.service
- * fileName : PostsServiceTest
+ * fileName : PostServiceTest
  * author :  ShinYeaChan
  * date : 2023-06-14
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class PostsServiceTest {
+public class PostServiceTest {
     
     @Autowired
     private PostsService postsService;
@@ -47,10 +47,10 @@ public class PostsServiceTest {
         postsService.savePost(dto);
         
         //then
-        Posts posts = postsRepository.findAll().get(0);
-        assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
-        assertThat(posts.getMarkDown()).isEqualTo(dto.getMarkDown());
-        assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
+        Post post = postsRepository.findAll().get(0);
+        assertThat(post.getAuthor()).isEqualTo(dto.getAuthor());
+        assertThat(post.getMarkDown()).isEqualTo(dto.getMarkDown());
+        assertThat(post.getTitle()).isEqualTo(dto.getTitle());
     }
     
  }

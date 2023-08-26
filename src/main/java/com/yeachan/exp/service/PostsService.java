@@ -1,6 +1,6 @@
 package com.yeachan.exp.service;
 
-import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.dto.PostDetailsResponseDto;
 import com.yeachan.exp.dto.PostUpdateRequestDto;
 import com.yeachan.exp.dto.PostsMainResponseDto;
@@ -21,7 +21,7 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Posts savePost(PostsSaveRequestDto dto){
+    public Post savePost(PostsSaveRequestDto dto){
         return postsRepository.save(dto.toEntity());
     }
     
@@ -33,25 +33,25 @@ public class PostsService {
     }
     
     @Transactional
-    public Posts deletePost(Long id){
-        Posts posts =  postsRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        postsRepository.delete(posts);
+    public Post deletePost(Long id){
+        Post post =  postsRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        postsRepository.delete(post);
         postsRepository.flush();
-        return posts;
+        return post;
     }
     @Transactional
     public void fixPost(Long postId,PostUpdateRequestDto dto) {
-        Posts posts = postsRepository.findById(postId).orElseThrow();
-        posts.updatePost(dto);
+        Post post = postsRepository.findById(postId).orElseThrow();
+        post.updatePost(dto);
     }
     
     public PostDetailsResponseDto getSinglePost(Long postId) {
-        Posts post = postsRepository.findById(postId)
+        Post post = postsRepository.findById(postId)
                 .orElseThrow(() -> new DataAccessResourceFailureException("Post not found"));
         byte[] markDown = post.getMarkDown();
         MarkdownUtils.convertToEncodedMarkdown(markDown);
         return new PostDetailsResponseDto(
-                post.getId(),
+                post.getPostId(),
                 post.getTitle(),
                 post.getAuthor(),
                 post.getModifiedDate().toString(),

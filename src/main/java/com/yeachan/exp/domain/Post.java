@@ -8,7 +8,7 @@ import org.hibernate.type.SqlTypes;
 
 /**
  * package :  com.yeachan.exp.domain
- * fileName : Posts
+ * fileName : Post
  * author :  ShinYeaChan
  * date : 2023-06-13
  */
@@ -18,11 +18,12 @@ import org.hibernate.type.SqlTypes;
 @ToString
 @Builder
 @AllArgsConstructor
-public class Posts extends BaseTimeEntity{
+public class Post extends BaseTimeEntity{
     
     @Id
     @GeneratedValue
-    private Long id;
+    @Column(name = "post_id")
+    private Long postId;
     
     @Column(length = 500, nullable = false)
     private String title;
@@ -33,6 +34,11 @@ public class Posts extends BaseTimeEntity{
     @Column(name = "mark_down", nullable = false)
     @JdbcTypeCode(SqlTypes.BLOB)
     private byte[] markDown;
+    
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+    
     
     public void updatePost(PostUpdateRequestDto dto) {
         super.updateModifiedDate();

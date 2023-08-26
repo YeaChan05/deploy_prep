@@ -1,6 +1,6 @@
 package com.yeachan.exp.dto;
 
-import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.domain.Post;
 import lombok.*;
 
 /**
@@ -25,8 +25,8 @@ public class PostsSaveRequestDto {
         this.author = author;
     }
     
-    public Posts toEntity() {
-        return Posts.builder()
+    public Post toEntity() {
+        return Post.builder()
                 .markDown(markDown.getBytes())
                 .author(author)
                 .title(title)

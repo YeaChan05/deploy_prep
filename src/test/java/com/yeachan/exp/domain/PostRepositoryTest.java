@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class PostsRepositoryTest {
+public class PostRepositoryTest {
     
     @Autowired
     PostsRepository postsRepository;
@@ -37,32 +37,32 @@ public class PostsRepositoryTest {
     @Test
     public void 게시글저장_불러오기() {
         //given
-        postsRepository.save(Posts.builder()
+        postsRepository.save(Post.builder()
                 .title("테스트 게시글")
                 .author("qkenrdl05@gmail.com")
                 .build());
         
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Post> postList = postsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
-        assertThat(posts.getTitle(), is("테스트 게시글"));
+        Post post = postList.get(0);
+        assertThat(post.getTitle(), is("테스트 게시글"));
         
     }
     @Test
     public void BaseTimeEntity_등록 () {
         //given
         LocalDateTime now = LocalDateTime.now();
-        postsRepository.save(Posts.builder()
+        postsRepository.save(Post.builder()
                 .title("테스트 게시글")
                 .author("qkenrdl05@gmail.com")
                 .build());
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Post> postList = postsRepository.findAll();
         //then
-        Posts posts = postsList.get(0);
-        assertTrue(posts.getCreatedDate().isAfter(now));
-        assertTrue(posts.getModifiedDate().isAfter(now));
+        Post post = postList.get(0);
+        assertTrue(post.getCreatedDate().isAfter(now));
+        assertTrue(post.getModifiedDate().isAfter(now));
     }
 }

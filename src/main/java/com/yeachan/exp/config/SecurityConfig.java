@@ -41,20 +41,20 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                
+                //401, 403 Exception handling
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
                         httpSecurityExceptionHandlingConfigurer
                                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                 .accessDeniedHandler(jwtAccessDeniedHandler))
-                
+                //servlet request에 대한 접근 제한
                 .authorizeHttpRequests(authorize->authorize
-                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/login","/auth/signup","/posts/all").permitAll()
                         .anyRequest().authenticated())
-                
+                //session block
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                
-                .apply(new JwtSecurityConfig((tokenProvider)));
+                //JwtSecurityConfig 적용
+                .apply(new JwtSecurityConfig(tokenProvider));
         
         return http.build();
     }

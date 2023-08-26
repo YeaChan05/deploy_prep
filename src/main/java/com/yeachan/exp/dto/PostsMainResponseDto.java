@@ -1,6 +1,6 @@
 package com.yeachan.exp.dto;
 
-import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.service.utils.MarkdownUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +24,9 @@ public class PostsMainResponseDto {
     private String author;
     private String modifiedDate;
     private String content;
-    public static PostsMainResponseDto of(Posts entity){
+    public static PostsMainResponseDto of(Post entity){
         return new PostsMainResponseDto(
-                entity.getId(),
+                entity.getPostId(),
                 entity.getTitle(),
                 entity.getAuthor(),
                 toStringDateTime(entity.getModifiedDate()),

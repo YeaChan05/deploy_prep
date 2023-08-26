@@ -1,6 +1,6 @@
 package com.yeachan.exp.api;
 
-import com.yeachan.exp.domain.Posts;
+import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.dto.PostDetailsResponseDto;
 import com.yeachan.exp.dto.PostUpdateRequestDto;
 import com.yeachan.exp.dto.PostsMainResponseDto;
@@ -27,8 +27,8 @@ public class WebRestController {
     
     @PostMapping("/publish")
     public ResponseEntity<?> savePosts(@RequestBody PostsSaveRequestDto dto){
-        Posts posts = postsService.savePost(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(posts);
+        Post post = postsService.savePost(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(post);
     }
     
     @PostMapping("/{postId}")
@@ -40,8 +40,8 @@ public class WebRestController {
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> deletePosts(@PathVariable Long postId) {
         try{
-            Posts posts = postsService.deletePost(postId);
-            return ResponseEntity.status(HttpStatus.OK).body(posts);
+            Post post = postsService.deletePost(postId);
+            return ResponseEntity.status(HttpStatus.OK).body(post);
         }catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

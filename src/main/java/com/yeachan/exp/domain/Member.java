@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -13,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Table(name = "member")
-@ToString
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,13 @@ public class Member {
     
     @Column(name = "activated")
     private boolean activated;
+    
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts;
+    
+    public void addPost(Post post){
+        this.posts.add(post);
+    }
     
     @ManyToMany
     @JoinTable(
