@@ -7,6 +7,7 @@ import com.yeachan.exp.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -49,6 +50,7 @@ public class SecurityConfig{
                 //servlet request에 대한 접근 제한
                 .authorizeHttpRequests(authorize->authorize
                         .requestMatchers("/auth/login","/auth/signup","/posts/all").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/post/**").permitAll()
                         .anyRequest().authenticated())
                 //session block
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
