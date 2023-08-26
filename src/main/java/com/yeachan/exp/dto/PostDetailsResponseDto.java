@@ -16,7 +16,6 @@ import java.io.Serializable;
 public class PostDetailsResponseDto implements Serializable {
     private Long id;
     private String title;
-    private String author;
     private String modifiedDate;
     private byte[] markDown;
 }

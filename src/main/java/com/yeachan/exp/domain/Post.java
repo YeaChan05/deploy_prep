@@ -28,8 +28,6 @@ public class Post extends BaseTimeEntity{
     @Column(length = 500, nullable = false)
     private String title;
     
-    private String author;
-    
     @Lob
     @Column(name = "mark_down", nullable = false)
     @JdbcTypeCode(SqlTypes.BLOB)

@@ -21,14 +21,12 @@ import java.util.Optional;
 public class PostsMainResponseDto {
     private Long id;
     private String title;
-    private String author;
     private String modifiedDate;
     private String content;
     public static PostsMainResponseDto of(Post entity){
         return new PostsMainResponseDto(
                 entity.getPostId(),
                 entity.getTitle(),
-                entity.getAuthor(),
                 toStringDateTime(entity.getModifiedDate()),
                 MarkdownUtils.convertToTextContent(entity.getMarkDown())
         );

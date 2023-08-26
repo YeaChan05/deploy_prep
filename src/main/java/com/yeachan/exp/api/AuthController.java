@@ -19,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 /**
  * package :  com.yeachan.exp.api
  * fileName : AuthController
@@ -59,13 +61,15 @@ public class AuthController {
     
     @GetMapping("/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<Member> getMyMemberInfo(){
-        return ResponseEntity.ok(memberService.getMyMemberWithAuthorities().get());
+    public ResponseEntity<MemberDto> getMyMemberInfo(){
+        Optional<Member> myMemberWithAuthorities = memberService.getMyMemberWithAuthorities();
+        return myMemberWithAuthorities.map(member -> ResponseEntity.ok(member.toResponseDto())).orElseGet(()->ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
     
     @GetMapping("/member/{email}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Member> getMemberInfo(@PathVariable String email){
-        return ResponseEntity.ok(memberService.getMemberWithAuthorities(email).get());
+    public ResponseEntity<MemberDto> getMemberInfo(@PathVariable String email){
+        Optional<Member> memberWithAuthorities = memberService.getMemberWithAuthorities(email);
+        return memberWithAuthorities.map(member -> ResponseEntity.ok(member.toResponseDto())).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 }

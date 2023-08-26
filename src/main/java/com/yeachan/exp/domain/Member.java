@@ -1,5 +1,6 @@
 package com.yeachan.exp.domain;
 
+import com.yeachan.exp.dto.MemberDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -46,4 +47,12 @@ public class Member {
             joinColumns = {@JoinColumn(name = "member_id",referencedColumnName = "member_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name",referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+    
+    public MemberDto toResponseDto() {
+        return MemberDto.builder()
+                .email(this.email)
+                .memberName(this.memberName)
+                .password(this.password)
+                .build();
+    }
 }

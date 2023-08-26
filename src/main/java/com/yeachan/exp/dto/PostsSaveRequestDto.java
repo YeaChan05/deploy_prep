@@ -1,5 +1,6 @@
 package com.yeachan.exp.dto;
 
+import com.yeachan.exp.domain.Member;
 import com.yeachan.exp.domain.Post;
 import lombok.*;
 
@@ -17,19 +18,17 @@ public class PostsSaveRequestDto {
     
     private String title;
     private String markDown;
-    private String author;
     @Builder
-    public PostsSaveRequestDto(String title, String markDown, String author) {
+    public PostsSaveRequestDto(String title, String markDown) {
         this.title = title;
         this.markDown = markDown;
-        this.author = author;
     }
     
-    public Post toEntity() {
+    public Post toEntity(Member member) {
         return Post.builder()
                 .markDown(markDown.getBytes())
-                .author(author)
                 .title(title)
+                .member(member)
                 .build();
     }
 }

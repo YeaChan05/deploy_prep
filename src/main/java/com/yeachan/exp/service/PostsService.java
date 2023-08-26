@@ -1,5 +1,6 @@
 package com.yeachan.exp.service;
 
+import com.yeachan.exp.domain.Member;
 import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.dto.PostDetailsResponseDto;
 import com.yeachan.exp.dto.PostUpdateRequestDto;
@@ -21,8 +22,8 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Post savePost(PostsSaveRequestDto dto){
-        return postsRepository.save(dto.toEntity());
+    public Post savePost(PostsSaveRequestDto dto, Member member){
+        return postsRepository.save(dto.toEntity(member));
     }
     
     @Transactional(readOnly = true)
@@ -53,7 +54,6 @@ public class PostsService {
         return new PostDetailsResponseDto(
                 post.getPostId(),
                 post.getTitle(),
-                post.getAuthor(),
                 post.getModifiedDate().toString(),
                 markDown
         );

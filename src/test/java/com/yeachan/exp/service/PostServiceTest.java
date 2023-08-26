@@ -1,5 +1,6 @@
 package com.yeachan.exp.service;
 
+import com.yeachan.exp.domain.Member;
 import com.yeachan.exp.domain.Post;
 import com.yeachan.exp.dto.PostsSaveRequestDto;
 import com.yeachan.exp.repository.PostsRepository;
@@ -38,17 +39,15 @@ public class PostServiceTest {
     public void Dto데이터가_posts테이블에_저장된다 () {
         //given
         PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
-                .author("qkenrdl05@gmail.com")
                 .markDown(String.valueOf("테스트 본문".getBytes()))
                 .title("테스트 타이틀")
                 .build();
         
         //when
-        postsService.savePost(dto);
+        postsService.savePost(dto,new Member());
         
         //then
         Post post = postsRepository.findAll().get(0);
-        assertThat(post.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(post.getMarkDown()).isEqualTo(dto.getMarkDown());
         assertThat(post.getTitle()).isEqualTo(dto.getTitle());
     }
