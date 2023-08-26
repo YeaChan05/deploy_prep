@@ -39,7 +39,6 @@ public class PostRepositoryTest {
         //given
         postsRepository.save(Post.builder()
                 .title("테스트 게시글")
-                .author("qkenrdl05@gmail.com")
                 .build());
         
         //when
@@ -56,7 +55,6 @@ public class PostRepositoryTest {
         LocalDateTime now = LocalDateTime.now();
         postsRepository.save(Post.builder()
                 .title("테스트 게시글")
-                .author("qkenrdl05@gmail.com")
                 .build());
         //when
         List<Post> postList = postsRepository.findAll();

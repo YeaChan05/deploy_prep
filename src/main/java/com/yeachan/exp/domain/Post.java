@@ -41,6 +41,6 @@ public class Post extends BaseTimeEntity{
     public void updatePost(PostUpdateRequestDto dto) {
         super.updateModifiedDate();
         this.title=dto.getTitle();
-        this.markDown= dto.getContent().getBytes();
+        this.markDown= dto.getMarkDown().getBytes();
     }
 }

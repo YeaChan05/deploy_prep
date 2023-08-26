@@ -17,5 +17,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PostUpdateRequestDto {
     private String title;
-    private String content;
+    private String markDown;
 }
