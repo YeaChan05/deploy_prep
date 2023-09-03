@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsUtils;
 
 /**
  * package :  com.yeachan.exp.config
@@ -49,8 +50,9 @@ public class SecurityConfig{
                                 .accessDeniedHandler(jwtAccessDeniedHandler))
                 //servlet request에 대한 접근 제한
                 .authorizeHttpRequests(authorize->authorize
-                        .requestMatchers("/auth/login","/auth/signup","/posts/all").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/post/**").permitAll()
+                        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                        .requestMatchers("/auth/login","/auth/signup").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/post/**","/posts/all").permitAll()
                         .anyRequest().authenticated())
                 //session block
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->

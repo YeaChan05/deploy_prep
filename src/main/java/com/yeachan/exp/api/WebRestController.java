@@ -34,7 +34,7 @@ public class WebRestController {
     public ResponseEntity<?> savePosts(@RequestBody PostsSaveRequestDto dto){
         Member member = memberService.getMyMemberWithAuthorities().orElseThrow();
         postsService.savePost(dto,member);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     
     @PostMapping("/{postId}")
